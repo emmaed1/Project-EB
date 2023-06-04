@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class PlayerCharacterController : MonoBehaviour
@@ -13,7 +14,6 @@ public class PlayerCharacterController : MonoBehaviour
     private Vector3 velocity;
     private bool isGrounded;
     private float horizontal;
-    
 
     // Start is called before the first frame update
     void Start()
@@ -22,14 +22,14 @@ public class PlayerCharacterController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        horizontal = 1;
-
-        transform.forward = new Vector3(horizontal, 0, Mathf.Abs(horizontal) - 1);
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+        Vector3 move = new Vector3(horizontal, 0, vertical);
 
         isGrounded = Physics.CheckSphere(transform.position, 0.1f, groundLayers, QueryTriggerInteraction.Ignore);
-        if(isGrounded && velocity.y < 0 )
+        if (isGrounded && velocity.y < 0)
         {
             velocity.y = 0;
         }
@@ -37,8 +37,7 @@ public class PlayerCharacterController : MonoBehaviour
         {
             velocity.y += gravity * Time.deltaTime;
         }
-        
-        characterController.Move(new Vector3(horizontal * runSpeed, 0, 0) * Time.deltaTime);
+        characterController.Move(move * runSpeed * Time.deltaTime);
 
         if (isGrounded && Input.GetButtonDown("Jump"))
         {

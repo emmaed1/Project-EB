@@ -5,19 +5,11 @@ using UnityEngine;
 public class PickupItems : MonoBehaviour
 {
 
-    public int cashValue = 1;
-
-    private void OnTriggerEnter3D(Collider other) { 
-        if(other.tag == "Player")
-        {
-            InventoryInterface inventory = other.GetComponent<InventoryInterface>();
-
-            if (inventory != null )
-            {
-                inventory.Money = inventory.Money + cashValue;
-                print("Player Inventory has " + inventory.Money + " money in it.");
+    private void OnTriggerEnter(Collider other) {
+        PlayerInventory playerInventory = other.GetComponent<PlayerInventory>();
+        if (playerInventory != null ){
+                playerInventory.MoneyCollected();
                 gameObject.SetActive(false);
-            }
         }
     }
 }

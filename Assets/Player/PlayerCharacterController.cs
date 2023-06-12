@@ -26,7 +26,7 @@ public class PlayerCharacterController : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-        Vector3 move = new Vector3(horizontal, 0, vertical);
+        Vector3 move = new Vector3(horizontal, 0, 0);
 
         isGrounded = Physics.CheckSphere(transform.position, 0.1f, groundLayers, QueryTriggerInteraction.Ignore);
         if (isGrounded && velocity.y < 0)

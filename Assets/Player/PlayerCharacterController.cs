@@ -1,7 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
+using Unity.VisualScripting;
+using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class PlayerCharacterController : MonoBehaviour
 {
@@ -14,6 +20,7 @@ public class PlayerCharacterController : MonoBehaviour
     private Vector3 velocity;
     private bool isGrounded;
     private float horizontal;
+    public GameObject RestartMenu;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +31,7 @@ public class PlayerCharacterController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-    
+        
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         Vector3 move = new Vector3(horizontal, 0, 0);
@@ -45,5 +52,9 @@ public class PlayerCharacterController : MonoBehaviour
             velocity.y += Mathf.Sqrt(jumpHeight * -2 * gravity);
         }
         characterController.Move(velocity * Time.deltaTime);
+        if (characterController.transform.position.y < -1)
+        {
+            RestartMenu.SetActive(true);
+        }
     }
 }

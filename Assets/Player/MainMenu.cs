@@ -20,18 +20,22 @@ public class MainMenu : MonoBehaviour
 
     public void Pausegame()
     {
-        if(Time.timeScale == 1.0f) 
+        if (Time.timeScale == 1.0f)
         {
             Time.timeScale = 0;
         }
-        
     }
+
     public void ResumeGame()
     {
         if(Time.timeScale == 0f)
         {
             Time.timeScale = 1;
-        }
-        
+        } 
+    }
+
+    public void backToMainMenu()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }

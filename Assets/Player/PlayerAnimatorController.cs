@@ -45,19 +45,13 @@ public class PlayerAnimatorController : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-        /*if (!Input.anyKey)
-        {
-            
-        }*/
+
         anim.SetBool("Crouch", Input.GetKey(KeyCode.LeftControl));
         if (accept_input)
         {
             anim.SetFloat("Blend", horizontal);
         }
-/*        if(Input.GetKey(KeyCode.Space))
-        {
-            anim.SetTrigger("Jumping");
-        }*/
+
         if(Input.GetKey(KeyCode.C)) 
         {
             anim.SetTrigger("Dancing");

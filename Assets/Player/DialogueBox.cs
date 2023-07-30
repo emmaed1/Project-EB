@@ -6,7 +6,6 @@ using TMPro;
 using Ink.Runtime;
 using Ink.Parsed;
 using System;
-using UnityEngine.UI;
 using UnityEditorInternal;
 using Story = Ink.Runtime.Story;
 using Text = UnityEngine.UI.Text;

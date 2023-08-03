@@ -13,7 +13,7 @@ public class PlayerCharacterController : MonoBehaviour
 {
     [SerializeField] LayerMask groundLayers;
     public float runSpeed = 8f;
-    public float jumpHeight = 2f;
+    public float jumpHeight = 3f;
 
     private float gravity = -50f;
     private CharacterController characterController;
@@ -22,13 +22,13 @@ public class PlayerCharacterController : MonoBehaviour
     private float horizontal;
     public GameObject RestartMenu;
 
-    // Start is called before the first frame update
+    static public bool dialogue = false;
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
     }
 
-    // Update is called once per frame
     private void Update()
     {
         
@@ -50,6 +50,11 @@ public class PlayerCharacterController : MonoBehaviour
         if (isGrounded && Input.GetButtonDown("Jump"))
         {
             velocity.y += Mathf.Sqrt(jumpHeight * -2 * gravity);
+        }
+
+        if (Input.GetButtonUp("Jump") && velocity.y > 0f)
+        {
+            velocity = new Vector3(0, velocity.y * 0.5f);
         }
         characterController.Move(velocity * Time.deltaTime);
         if (characterController.transform.position.y < -1)
